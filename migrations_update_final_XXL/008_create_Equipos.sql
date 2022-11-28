@@ -1,0 +1,20 @@
+CREATE TABLE Equipos(
+	id NUMBER(7) PRIMARY KEY,
+	nombre VARCHAR2(15) NOT NULL
+);
+
+ALTER TABLE Equipos ADD (
+  CONSTRAINT Equipos_pk PRIMARY KEY (ID));
+
+CREATE SEQUENCE Equipos_seq START WITH 1;
+
+CREATE OR REPLACE TRIGGER Equipos_pk 
+BEFORE INSERT ON Equipos 
+FOR EACH ROW
+
+BEGIN
+  SELECT Equipos_seq.NEXTVAL
+  INTO   :new.id
+  FROM   dual;
+END;
+/
